@@ -9,10 +9,10 @@
 <body>
     <h1>Events</h1>
     <p> 
-        @if (count($events) > 1)  
-         Il y a {{ count($events) }} événements programmés 
+        @if ($events->count()) > 1)  
+         Il y a {{ $events->count() }} événements programmés 
         @else
-         Il y a {{ count($events) }} événement programmé
+         Il y a {{ $events->count() }} événement programmé
         @endif 
     </p>
 
@@ -20,8 +20,13 @@
         <article>
             <h1>{{ $event->name }}</h1>
             <p>{{ $event->description }}</p>
-            <p>{{ $event->price }}</p>
+            <p> {!! format_price($event) !!}
+                </p>
             <p>Lieu: {{ $event->location }}</p>
+            <p>Date avec l'objet DateTime: {{ (new DateTime ($event->starts_at))->format('j/m/Y H:i') }}</p>
+            <p>Date avec Carbon, et propriétés $dates dans le modèle: {{ $event->starts_at->format('d/m/Y H:i') }}</p>
+            <p>Date avec Helpers.php: {{ format_date($event->starts_at) }}</p>
+            <p>Date avec Helpers CLASS: {{ EventsHelper::formatDate($event->starts_at) }}</p>
         </article>
         @if (! $loop->last)
         <hr>

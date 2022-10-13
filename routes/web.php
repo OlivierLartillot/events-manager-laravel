@@ -15,13 +15,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-/*     Event::create([
+/* 
+    Event::create([
         'name' => 'Cinéma en plein nerf',
-        'description' => 'Un super film ce soir ... ' ,
-        'location' => 'Paris, FR',
-        'price' => 10
-    ]); */
+        'description' => 'Un super film ... ' ,
+        'location' => 'Lyon, FR',
+        'price' => 0,
+        'starts_at' => new DateTime('+5 days')
+    ]);
+    Event::create([
+        'name' => 'Match foot',
+        'description' => 'Un super match ... ' ,
+        'location' => 'Montpellier, FR',
+        'price' => 15,
+        'starts_at' => new DateTime('+10 hours')
+    ]); 
+ */
     $events = Event::all();
     return view('events.index')->withEvents($events);
 });
