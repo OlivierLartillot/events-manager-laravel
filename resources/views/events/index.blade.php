@@ -27,6 +27,8 @@
             <p>Date avec Carbon, et propriétés $dates dans le modèle: {{ $event->starts_at->format('d/m/Y H:i') }}</p>
             <p>Date avec Helpers.php: {{ format_date($event->starts_at) }}</p>
             <p>Date avec Helpers CLASS: {{ EventsHelper::formatDate($event->starts_at) }}</p>
+            <p>Format Price avec Helper CLASS {!! EventsHelper::formatPrice($event) !!}<p>
+
         </article>
         @if (! $loop->last)
         <hr>

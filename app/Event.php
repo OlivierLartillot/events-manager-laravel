@@ -12,7 +12,12 @@ class Event extends Model
     //!!! contraire => protectd $guarded = ['id'];
 
     // on utilise la transformation de date de Laravel / Carbon pour 'starts_at'
-    protected $dates = ['starts_at'];
+    //protected $dates = ['starts_at'];
+
+    protected $casts = [
+        'starts_at' => 'datetime',
+        'price' => 'float',
+    ];
 
     public function isFree() 
     {

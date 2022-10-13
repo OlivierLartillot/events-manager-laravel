@@ -21,6 +21,33 @@ php artisan make:model Event -m
 ```
 => -m va créer la migration events associé a Event pour la db !
 
+## Quelques Mémos et explications dans le modéle
+
+1. Fillable 
+
+Permet de donner les attributs qui sont modifiables !
+```php
+protected $fillable = ['name', 'description', 'location'];
+```
+
+2. Guarded 
+
+Le contraire de fillable ...
+
+3. Dates
+
+Transforme automatiquement la date en un objet Carbon (qui gère les dates)
+```php
+protected $dates = ['starts_at'];
+```
+
+4. Casts
+```php
+protected $casts = ['starts_at' => 'datetime'];
+```
+
+
+
 ## Utilisation des collections 
 
 => Utiliser les collections est mieux pour éviter de faire plusieurs requêtes à la bdd quand on le peut !!!
@@ -40,10 +67,24 @@ $montableau->count()
 
 ## Les Helpers
 
-Le Helper nous permet de créer une fonction et de l'utiliser directement dans le template par exemple ! trop cool.
+1. Le Helper nous permet de créer une fonction et de l'utiliser directement dans le template par exemple ! trop cool.
 
 * il faut créer le fichier (ex: helper.php)
 * rajouter ce fichier au niveau de l'autoload (composer.json)
 * exécuter le composer dump-autoload
 
+2. On peut Créer facilement un Helper dans une classe !
 
+* Ranger: créér un dossier (ex: app\Helpers)
+* Enregistrer une classe explicite dans ce fichier (EventsHelper.php)
+* Enregistrer ce fichier dans le config\app.php
+```php
+    'aliases' => Facade::defaultAliases()->merge([
+        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'EventsHelper' => App\Helpers\EventsHelper::class,
+    ])->toArray(),
+```
+* Utiliser dans le template
+```php
+    {{ EventsHelper::formatDate($event->starts_at) }}
+```

@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Event;
+use Carbon\Carbon;
 
 class EventsHelper {
 
@@ -15,12 +16,13 @@ class EventsHelper {
             // %d => un entier
             // %f => un flottant 
             // y a aussi number_format qui est top !
-            return sprintf("%.2f euros" , $event->price);
+            // %.2f euros => 10.00 / %.0f euros => 10
+            return sprintf("%.0f euros" , $event->price);
         }
     }
 
 // formate la date à notre image
-    public static function formatDate($date) {
+    public static function formatDate(Carbon $date) {
         return $date->format('d/m/y H:i');
     }
 
