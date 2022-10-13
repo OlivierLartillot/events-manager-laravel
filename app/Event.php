@@ -13,7 +13,7 @@ class Event extends Model
 
     // on utilise la transformation de date de Laravel / Carbon pour 'starts_at'
     //protected $dates = ['starts_at'];
-
+    protected $appends = ['fake_price'];
     protected $casts = [
         'starts_at' => 'datetime',
         'price' => 'float',
@@ -23,4 +23,14 @@ class Event extends Model
     {
         return $this->price == 0;
     }
+
+    
+   // ! Attribute est très important dans la définition de la fonction
+    public function getFakePriceAttribute(){
+        // return $this->price + 200;
+        // c est la meme chose !
+        return $this->attributes['price'] + 100;
+    }
+
+
 }

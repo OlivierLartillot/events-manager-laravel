@@ -46,6 +46,23 @@ protected $dates = ['starts_at'];
 protected $casts = ['starts_at' => 'datetime'];
 ```
 
+5. Appends
+
+Ajoute un "attribut fictif" à l'objet (par exemple une fonction getFakePriceAttribute).
+* Sera disponible en tant qu'attribut lorsqu on attrape "l'objet" ou une collection d'objets 
+```php
+protected $appends = ['fake_price'];
+...
+public function getFakePriceAttribute(){
+    return $this->attributes['price'] + 100;
+}
+```
+
+6. Hidden
+Le contraire de Appends ... On va cacher un attribut qu'on ne veut pas afficher / recevoir
+```php
+protected $hidden = ['location'];
+```
 
 
 ## Utilisation des collections 
@@ -87,4 +104,14 @@ $montableau->count()
 * Utiliser dans le template
 ```php
     {{ EventsHelper::formatDate($event->starts_at) }}
+```
+## Tinker console 
+```bash
+php artisan tinker
+```
+Ouvre une console dans laquelle on peut faire directement des modifs ou rendre une liste etc..
+```bash
+>>> $evts = App\Event::all()
+>>> $e = App\Event::first()
+>>> $e->update['price'=>20]
 ```
